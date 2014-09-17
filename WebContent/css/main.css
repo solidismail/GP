@@ -1,0 +1,22 @@
+
+.center {
+	text-align: center;
+}
+.framed {
+	padding: 3px;
+	border: 1px solid #999;
+	margin: 5px;
+}
+.gray {
+	color: #999;
+}
+
+/* Widgets */
+textarea.richtext		{ width: 673px; height: 400px; }
+input.timepicker		{ width: 75px; border: 1px solid #c7d7e6; }
+input.datepicker		{ width: 100px; border: 1px solid #c7d7e6; }
+input.datetimepicker,
+input.datetimepicker_es	{ width: 140px; border: 1px solid #c7d7e6; }
+input.colorpicker		{ width: 100px; border: 1px solid #c7d7e6; }
+input.filechooser		{ width: 300px; border: 1px solid #c7d7e6; }
+.ratingcontainer { float: right; text-align: right; }}

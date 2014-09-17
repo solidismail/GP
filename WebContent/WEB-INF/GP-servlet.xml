@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- pour l affichages des messages d erreurs de validation -->
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
+	<bean name="/acceuil.htm" class="gp.controller.AcceuilController">
+	</bean>
+	<!-- FIN -->
+
+
+	<!-- FILE UPLOAD -->
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<!-- <property name="maxUploadSize" value="100000"/> -->
+	</bean>
+
+	<!-- ############# -->
+
+	<!-- Fonctionnalités communes -->
+
+	<bean name="/editInfosPerso.htm" class="gp.controller.EditInfosPersoSimpleController">
+		<property name="sessionForm" value="true" />
+		<property name="commandName" value="User2" />
+
+		<property name="commandClass" value="gp.javabeans.User" />
+
+		<property name="validator">
+			<bean class="gp.validator.UserValidator" />
+		</property>
+
+
+		<property name="formView" value="simple/editInfosPerso" />
+		<property name="successView" value="/acceuil.htm" />
+
+	</bean>
+
+	<bean name="/authentification.htm" class="gp.controller.AuthentificationController">
+
+		<property name="sessionForm" value="true" />
+		<property name="commandName" value="User" />
+
+		<property name="commandClass" value="gp.javabeans.User" />
+
+		<property name="validator">
+			<bean class="gp.validator.UserValidator" />
+		</property>
+
+		<property name="formView" value="authentification" />
+		<property name="successView" value="authentification.htm" />
+		<!-- <property name="iuserimpl" > <ref bean="iuserimpl" /> </property> -->
+	</bean>
+
+
+	<bean name="/detailProject.htm" class="gp.controller.DetailProjectController">
+	</bean>
+	
+
+	<!-- Fin -->
+
+
+	<!-- choose project -->
+
+	<bean name="/chooseProject.htm" class="gp.controller.ChooseProjectSimpleController">
+	</bean>
+
+	<bean name="/project.htm" class="gp.controller.ProjectController">
+	</bean>
+
+	<!-- Fin -->
+
+	<!-- Admin -->
+	<bean name="/gestionComptes.htm" class="gp.controller.GestionComptesAdminController">
+	</bean>
+
+	<bean name="/afficheLogs.htm" class="gp.controller.AfficheLogsAdminController">
+	</bean>
+
+	<bean name="/createCompte.htm" class="gp.controller.CreateCompteAdminController">
+		<property name="sessionForm" value="true" />
+		<property name="commandName" value="User" />
+
+		<property name="commandClass" value="gp.javabeans.User" />
+
+		<property name="validator">
+			<bean class="gp.validator.UserValidator" />
+		</property>
+
+		<property name="formView" value="admin/createCompte" />
+		<property name="successView" value="/createCompte.htm" />
+
+	</bean>
+
+	<!-- FIN -->
+
+	<!-- Directeur de projets -->
+	<bean name="/createProject.htm" class="gp.controller.CreateProjectDirectorController">
+		<property name="sessionForm" value="true" />
+		<property name="commandName" value="project" />
+
+		<property name="commandClass" value="gp.javabeans.Project" />
+
+		<property name="validator">
+			<bean class="gp.validator.ProjectValidator" />
+		</property>
+
+		<property name="formView" value="director/createProject" />
+		<property name="successView" value="/createProject.htm" />
+
+	</bean>
+
+
+
+	<bean name="/gestionProjects.htm" class="gp.controller.GestionProjectsDirectorController">
+	</bean>
+
+
+	<bean name="/listDeveloppers.htm" class="gp.controller.ListDeveloppersDirectorController">
+	</bean>
+
+
+
+	<bean name="/listParticipants.htm" class="gp.controller.ListParticipantsReunionController">
+	</bean>
+
+	<!-- FIN -->
+
+	<!-- Client -->
+	<bean name="/chooseProjectClient.htm" class="gp.controller.ChooseProjectClientController">
+	</bean>
+	<bean name="/validerDocument.htm" class="gp.controller.ValiderDocumentController">
+	</bean>
+	<bean name="/consulterReunionClient.htm" class="gp.controller.ConsulterReunionClientController">
+	</bean>
+	<bean name="/projectClient.htm" class="gp.controller.projectClientController">
+	</bean>
+
+	<!-- FIN -->
+
+	<!-- chef de projets -->
+
+	<bean name="/associerDeveloppeur.htm" class="gp.controller.AssociateRemoveDevloppeurController">
+		<property name="sessionForm" value="true" />
+		<property name="commandName" value="user" />
+		<property name="commandClass" value="gp.javabeans.User" />
+		<property name="formView" value="projectManager/associerDeveloppeur" />
+		<property name="successView" value="projectManager/acceuil.htm" />
+	</bean>
+
+	<bean name="/attributeActivity.htm" class="gp.controller.AttributeActivityController">
+		<property name="sessionForm" value="true" />
+		<property name="commandName" value="activity" />
+		<property name="commandClass" value="gp.javabeans.Activity" />
+
+		<property name="validator">
+			<bean class="gp.validator.ActivityValidator" />
+		</property>
+		<property name="formView" value="projectManager/attributeActivity" />
+		<property name="successView" value="projectManager/acceuil.htm" />
+	</bean>
+
+	<bean name="/createReunion.htm" class="gp.controller.createReunionController">
+		<property name="sessionForm" value="true" />
+		<property name="commandName" value="reunion" />
+		<property name="commandClass" value="gp.javabeans.Reunion" />
+
+		<property name="validator">
+			<bean class="gp.validator.ReunionValidator" />
+		</property>
+
+		<property name="formView" value="projectManager/createReunion" />
+		<property name="successView" value="projectManager/acceuil.htm" />
+	</bean>
+	
+	<bean name="/sendMail.htm" class="gp.controller.MailController">
+		<property name="sessionForm" value="true" />
+		<property name="commandName" value="mail" />
+		<property name="commandClass" value="gp.javabeans.Mail" />
+
+		<property name="formView" value="/sendMail" />
+		<property name="successView" value="projectManager/acceuil.htm" />
+	</bean>
+
+
+	<bean name="/gestionReunions.htm" class="gp.controller.ConsulterReunionClientController">
+	</bean>
+
+	<bean name="/fileUploadPM.htm" class="gp.controller.FileUploadController">
+		<property name="commandName" value="FileUpload" />
+		<property name="commandClass" value="gp.javabeans.FileUploadBean" />
+		
+				<property name="validator">
+			<bean class="gp.validator.FileuploadValidator" />
+		</property>
+		
+		<property name="formView" value="projectManager/fileuploadform" />
+		<property name="successView" value="acceuil" />
+	</bean>
+	
+	
+	
+		<bean name="/listOfMails.htm" class="gp.controller.ReciveMailController">
+	</bean>
+	
+		<bean name="/showMail.htm" class="gp.controller.ShowMailController">
+	</bean>
+
+	<!-- FIN -->
+
+	<!-- Developpeur -->
+	<bean name="/consulterDocuments.htm" class="gp.controller.ValiderDocumentController">
+	</bean>
+	<bean name="/consulterReunion.htm" class="gp.controller.ConsulterReunionClientController">
+	</bean>
+	<bean name="/consulterActivities.htm" class="gp.controller.ConsulterActivitiesController">
+	</bean>
+
+	<bean name="/fileUploadDev.htm" class="gp.controller.FileUploadController">
+		<property name="commandName" value="FileUpload" />
+		<property name="commandClass" value="gp.javabeans.FileUploadBean" />
+		
+			<property name="validator">
+			<bean class="gp.validator.FileuploadValidator" />
+		</property>
+		
+		<property name="formView" value="developper/fileuploadform" />
+		<property name="successView" value="acceuil" />
+	</bean>
+
+
+
+
+	<!-- FIN -->
+
+	<!-- DAO -->
+	<bean id="dao" class="gp.dao.Dao">
+	</bean>
+
+	<bean id="daoFactory" class="gp.dao.DaoFactory" scope="singleton">
+	</bean>
+
+
+	<bean id="ccp" class="gp.implementation.CUserChooseProject">
+		<property name="df">
+			<ref bean="daoFactory" />
+		</property>
+		<property name="dao">
+			<ref bean="dao" />
+		</property>
+	</bean>
+
+
+	<!-- FIN DAO -->
+
+
+	<bean name="/disconnect.htm" class="gp.controller.DisconnectController">
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+</beans>
